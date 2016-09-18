@@ -1,7 +1,6 @@
 package com.kasiarakos.Dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +8,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.kasiarakos.model.Circle;
@@ -19,15 +19,9 @@ public class JdbcDaoImpl {
 	@Autowired
 	private DataSource dataSource;
 	
-
-	public DataSource getDataSource() {
-		return dataSource;
-	}
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
+	@Autowired
+	private JdbcTemplate  template;
+	
 	public Circle getCircle(int id){
 		
 		Connection conn = null;
@@ -59,5 +53,10 @@ public class JdbcDaoImpl {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public int getCount(){
+		String sql = "SELECT COUNT(*) FROM circle";
+		return template.queryForObject(sql, Integer.class);
 	}
 }
