@@ -14,19 +14,30 @@ public class Main {
 	public static void main(String[] args) {
 		AbstractApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 		
+		
 		JdbcDaoImpl dao = context.getBean(JdbcDaoImpl.class);
-		Circle circle = dao.getCircle(1);
-		System.out.println(circle.getName());
+		try{
+			dao.getCircle(3);
+		}catch(Exception e){
+			dao.insertCircle(new Circle(3, "thirdcircle"));
+		}
+		
+		
+		
 		System.out.println("count: "+dao.getCount());
 		System.out.println("Circle name: "+dao.getCircleName(1));
-		Circle c = dao.getCircleObject(1);
+		Circle c = dao.getCircle(1);
 		System.out.println("circle 1: "+c);
 		
 		System.out.println("\n>>All Circles");
-		
-		
 		List<Circle> circles = dao.getAllCircles();
 		circles.forEach((ci)->{System.out.println(ci);});
+		
+		if(dao.createTable()){
+			System.out.println("Triangle Table created");
+		}else{
+			System.out.println("problem creating triangle table it may already exists");
+		}
 		
 		context.close();
 	}
