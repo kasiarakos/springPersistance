@@ -6,6 +6,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @ComponentScan(basePackages={"com.kasiarakos"})
@@ -24,6 +25,13 @@ public class SpringConfig {
 		dm.setMaxActive(5);
 		
 		return dm;
+	}
+	
+	@Bean
+	JdbcTemplate jdbcTemplate(DataSource dataSource){
+		JdbcTemplate template = new JdbcTemplate();
+		template.setDataSource(dataSource);
+		return template;
 	}
 
 }

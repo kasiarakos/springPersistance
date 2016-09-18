@@ -15,6 +15,8 @@ public class Main {
 		JdbcDaoImpl dao = context.getBean(JdbcDaoImpl.class);
 		Circle circle = dao.getCircle(1);
 		System.out.println(circle.getName());
+		System.out.println("count: "+dao.getCount());
+		System.out.println("Circle name: "+dao.getCircleName(1));
 		
 		context.close();
 	}

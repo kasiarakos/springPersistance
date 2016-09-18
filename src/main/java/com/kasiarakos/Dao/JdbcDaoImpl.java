@@ -59,4 +59,16 @@ public class JdbcDaoImpl {
 		String sql = "SELECT COUNT(*) FROM circle";
 		return template.queryForObject(sql, Integer.class);
 	}
+	
+	public String getCircleName(int id){
+		String sql = "Select name from circle where id = ?";
+		return template.queryForObject(sql, new Object[]{id}, String.class);
+	}
+	
+	public Circle getCircleObject(int id){
+		//String sql = "select * from circle where id = ?";
+		//TODO create raw mapper
+		//template.queryForObject(sql,new Object[]{id}, )
+		return null;
+	}
 }
