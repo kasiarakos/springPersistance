@@ -1,5 +1,7 @@
 package com.kasiarakos.main;
 
+import java.util.List;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
@@ -17,6 +19,14 @@ public class Main {
 		System.out.println(circle.getName());
 		System.out.println("count: "+dao.getCount());
 		System.out.println("Circle name: "+dao.getCircleName(1));
+		Circle c = dao.getCircleObject(1);
+		System.out.println("circle 1: "+c);
+		
+		System.out.println("\n>>All Circles");
+		
+		
+		List<Circle> circles = dao.getAllCircles();
+		circles.forEach((ci)->{System.out.println(ci);});
 		
 		context.close();
 	}
