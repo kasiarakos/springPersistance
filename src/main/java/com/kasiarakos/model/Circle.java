@@ -1,9 +1,18 @@
 package com.kasiarakos.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Circle {
 
+	@Id
 	private int id;
 	private String name;
+	
+	public Circle() {
+		
+	}
 
 	public Circle(int id, String name) {
 		super();

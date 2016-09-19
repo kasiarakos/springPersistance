@@ -24,22 +24,22 @@ public class JdbcDaoImpl {
 	private NamedParameterJdbcTemplate nametdTemplate;
 
 	public int getCount() {
-		String sql = "SELECT COUNT(*) FROM circle";
+		String sql = "SELECT COUNT(*) FROM Circle";
 		return template.queryForObject(sql, Integer.class);
 	}
 
 	public String getCircleName(int id) {
-		String sql = "Select name from circle where id = ?";
+		String sql = "Select name from Circle where id = ?";
 		return template.queryForObject(sql, new Object[] { id }, String.class);
 	}
 
 	public Circle getCircle(int id) {
-		String sql = "select * from circle where id = ?";
+		String sql = "select * from Circle where id = ?";
 		return template.queryForObject(sql, new Object[] { id }, new CircleMapper());
 	}
 
 	public List<Circle> getAllCircles() {
-		String sql = "select * from circle";
+		String sql = "select * from Circle";
 		return template.query(sql, new CircleMapper());
 	}
 
@@ -49,7 +49,7 @@ public class JdbcDaoImpl {
 	// }
 
 	public void insertCircle(Circle circle) {
-		String sql = "Insert into circle values (:id, :name)";
+		String sql = "Insert into Circle values (:id, :name)";
 		SqlParameterSource nameddParameters = new MapSqlParameterSource("id", circle.getId()).addValue("name",
 				circle.getName());
 

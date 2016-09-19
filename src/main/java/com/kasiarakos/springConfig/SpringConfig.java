@@ -1,13 +1,18 @@
 package com.kasiarakos.springConfig;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 
 import com.kasiarakos.Dao.SupportJdbcDaoImpl;
 
@@ -48,5 +53,25 @@ public class SpringConfig {
 		dao.setDataSource(dataSource);
 		return dao;
 	}
+	
+	
+	
+	 @Bean
+	  public SessionFactory sessionFactoryBean() {
+	    try {
+	      LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
+	      lsfb.setDataSource(dataSource());
+	      lsfb.setPackagesToScan("com.kasiarakos.model");
+	      Properties props = new Properties();
+	      props.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+	      lsfb.setHibernateProperties(props);
+	      lsfb.afterPropertiesSet();
+	      SessionFactory object = lsfb.getObject();
+	      return object;
+	    } catch (IOException e) {
+	      return null;
+	    }
+	  }
+
 	
 }

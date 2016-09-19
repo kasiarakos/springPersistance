@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
+import com.kasiarakos.Dao.HibernateDaoImpl;
 import com.kasiarakos.Dao.JdbcDaoImpl;
 import com.kasiarakos.Dao.SupportJdbcDaoImpl;
 import com.kasiarakos.model.Circle;
@@ -18,6 +19,7 @@ public class Main {
 		
 		JdbcDaoImpl dao = context.getBean(JdbcDaoImpl.class);
 		SupportJdbcDaoImpl  daoSupport = context.getBean(SupportJdbcDaoImpl.class);
+		HibernateDaoImpl daoHibernte = context.getBean(HibernateDaoImpl.class);
 		
 		System.out.println(daoSupport.getCircle(3));
 		
@@ -43,6 +45,10 @@ public class Main {
 		}else{
 			System.out.println("problem creating triangle table it may already exists");
 		}
+		
+		System.out.println("\n\n\n");
+		Circle circleHi = daoHibernte.findOne(2);
+		System.out.println("hybernate count: "+circleHi);
 		
 		context.close();
 	}
