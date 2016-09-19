@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import com.kasiarakos.Dao.SupportJdbcDaoImpl;
+
 @Configuration
 @ComponentScan(basePackages={"com.kasiarakos"})
 public class SpringConfig {
@@ -38,6 +40,13 @@ public class SpringConfig {
 	@Bean
 	NamedParameterJdbcTemplate namedPatameterJdbcTemplate(DataSource dataSource){
 		return new NamedParameterJdbcTemplate(dataSource);
+	}
+	
+	@Bean
+	SupportJdbcDaoImpl supportJdbcDaoImpl(DataSource dataSource){
+		SupportJdbcDaoImpl dao = new SupportJdbcDaoImpl();
+		dao.setDataSource(dataSource);
+		return dao;
 	}
 	
 }

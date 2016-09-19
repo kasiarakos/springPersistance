@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import com.kasiarakos.Dao.JdbcDaoImpl;
+import com.kasiarakos.Dao.SupportJdbcDaoImpl;
 import com.kasiarakos.model.Circle;
 import com.kasiarakos.springConfig.SpringConfig;
 
@@ -16,6 +17,10 @@ public class Main {
 		
 		
 		JdbcDaoImpl dao = context.getBean(JdbcDaoImpl.class);
+		SupportJdbcDaoImpl  daoSupport = context.getBean(SupportJdbcDaoImpl.class);
+		
+		System.out.println(daoSupport.getCircle(3));
+		
 		try{
 			dao.getCircle(4);
 		}catch(Exception e){
