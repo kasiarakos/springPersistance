@@ -17,9 +17,9 @@ public class Main {
 		
 		JdbcDaoImpl dao = context.getBean(JdbcDaoImpl.class);
 		try{
-			dao.getCircle(3);
+			dao.getCircle(4);
 		}catch(Exception e){
-			dao.insertCircle(new Circle(3, "thirdcircle"));
+			dao.insertCircle(new Circle(4, "fourthCircle"));
 		}
 		
 		
